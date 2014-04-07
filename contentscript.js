@@ -1,26 +1,40 @@
-var attributes = document.getElementsByClassName('webkit-html-attribute-value');
+var attributes = document.getElementsByClassName('webkit-html-attribute-name');
+var wanted = ['key','art','thumb'];
+var dontFollow = ['transcode','search','butler','playQueues'];
 
 for (var i=0; i<attributes.length; i++)
 {
 
-	if (attributes[i].childNodes.length === 0)
+	if (wanted.indexOf(attributes[i].childNodes[0].nodeValue) < 0)
 	{
 		continue;
 	}
 
-	var node = attributes[i].childNodes[0];
+	var thisType = attributes[i].childNodes[0].nodeValue;
+	var node = attributes[i].nextSibling.nextSibling.childNodes[0];
+ 	var url = node.textContent;
+ 	
+ 	// to follow or not to follow?
+ 	if (dontFollow.indexOf(url) >= 0){
+ 		continue;
+ 	}
 
-	if (node.nodeValue.substring(0, 7) == 'http://' || node.nodeValue.substring(0, 1) == '/')
-	{
-		var url = node.nodeValue;
-		var textNode = document.createTextNode(url);
+	var textNode = document.createTextNode(url);
+ 	
+ 	// if this is a 'key' and it doesn't start with a / then it's relative
+ 	// and to enable the NEXT link to work properly we just end in /
+ 	// NB: we do this after we create the url text as we only want to adjust
+ 	// the actual href and not the displayed text
+ 	if (thisType=='key' && thisType[0] != '/'){
+		url = url+"/";
+ 	}
 
-		var a = document.createElement('a');
-		a.setAttribute('href', url);
-		a.addEventListener('click', function() { window.location = this.getAttribute('href'); }, false);
-		a.appendChild(textNode);
-		
-		node.parentNode.setAttribute('style','color: blue; cursor: pointer; text-decoration: underline;');
-		node.parentNode.replaceChild(a, node);
-	}
+	var a = document.createElement('a');
+	a.setAttribute('href', url);
+	a.addEventListener('click', function() { window.location = this.getAttribute('href'); }, false);
+	a.appendChild(textNode);
+
+	node.parentNode.setAttribute('style','cursor: pointer; text-decoration: underline;');
+	node.parentNode.replaceChild(a, node);
+
 }

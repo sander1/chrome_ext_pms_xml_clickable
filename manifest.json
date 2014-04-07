@@ -5,7 +5,7 @@
 	"content_scripts":
 	[
 		{
-			"matches": ["http://localhost:32400/*"],
+			"matches": ["http://192.168.10.19:32400/*"],
 			"js" : ["contentscript.js"]
 		}
 	]
