@@ -19,7 +19,7 @@ for (var i=0; i<attributes.length; i++)
  		continue;
  	}
  	
- 	// rtmp/rtmp3?  Don't build this link
+ 	// rtmp/rtmpe?  Don't build this link
  	if (url.substr(0,7) == 'rtmp://' || url.substr(0,8) == 'rtmpe://'){
  		continue;
  	}
