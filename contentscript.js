@@ -21,11 +21,11 @@ for (var i=0; i<attributes.length; i++)
 
 	var textNode = document.createTextNode(url);
  	
- 	// if this is a 'key' and it doesn't start with a / then it's relative
- 	// and to enable the NEXT relative link to work properly we need to end in /
+ 	// if this is a 'key' and it doesn't end with a / then we should enforce this
+ 	// because if the next key is relative it needs this to function
  	// NB: we do this after we create the url text as we only want to adjust
  	// the actual href and not the displayed text
- 	if (thisType=='key' && thisType[0] != '/'){
+ 	if (thisType=='key' && thisType.slice(-1) != '/'){
 		url = url+"/";
  	}
 
