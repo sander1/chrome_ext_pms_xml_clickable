@@ -19,7 +19,8 @@ for (var i=0; i<attributes.length; i++)
 		a.setAttribute('href', url);
 		a.addEventListener('click', function() { window.location = this.getAttribute('href'); }, false);
 		a.appendChild(textNode);
-
+		
+		node.parentNode.setAttribute('style','color: blue; cursor: pointer; text-decoration: underline;');
 		node.parentNode.replaceChild(a, node);
 	}
 }
