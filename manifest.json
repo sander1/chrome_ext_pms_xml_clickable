@@ -5,7 +5,8 @@
 	"content_scripts":
 	[
 		{
-			"matches": ["http://localhost:32400/*"],
+			"matches": ["<all_urls>"],
+			"include_globs": ["*://*:32400/*"],
 			"js" : ["contentscript.js"]
 		}
 	]
