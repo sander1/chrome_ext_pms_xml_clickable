@@ -1,5 +1,5 @@
 var attributes = document.getElementsByClassName('webkit-html-attribute-name');
-var wanted = ['key','art','thumb'];
+var wanted = ['key','art','thumb','sourceIcon'];
 var dontFollow = ['transcode','search','butler','playQueues','help'];
 
 for (var i=0; i<attributes.length; i++)
@@ -16,6 +16,11 @@ for (var i=0; i<attributes.length; i++)
  	
  	// to follow or not to follow?
  	if (dontFollow.indexOf(url) >= 0){
+ 		continue;
+ 	}
+ 	
+ 	// rtmp/rtmp3?  Don't build this link
+ 	if (url.substr(0,7) == 'rtmp://' || url.substr(0,8) == 'rtmpe://'){
  		continue;
  	}
 
