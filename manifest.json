@@ -1,11 +1,11 @@
 {
 	"name": "Clickable links for Plex Media Server XML",
-	"version": "0.1",
+	"version": "0.2",
 	"manifest_version": 2,
 	"content_scripts":
 	[
 		{
-			"matches": ["http://192.168.10.19:32400/*"],
+			"matches": ["http://localhost:32400/*"],
 			"js" : ["contentscript.js"]
 		}
 	]
