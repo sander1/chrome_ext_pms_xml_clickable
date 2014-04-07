@@ -1,6 +1,6 @@
 var attributes = document.getElementsByClassName('webkit-html-attribute-name');
 var wanted = ['key','art','thumb'];
-var dontFollow = ['transcode','search','butler','playQueues'];
+var dontFollow = ['transcode','search','butler','playQueues','help'];
 
 for (var i=0; i<attributes.length; i++)
 {
