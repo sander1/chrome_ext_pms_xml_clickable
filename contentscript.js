@@ -33,6 +33,7 @@ function buttons(){
 	// newly created nodes do not work but cloning existing ones does!)
 	var newNode = header.childNodes[0].cloneNode(true);
 	var newNode2 = header.childNodes[0].cloneNode(true);
+	var newNode3 = header.childNodes[0].cloneNode(true);
 
 	// remove all existing nodes from header
 	for(i=0;i<=header.childElementCount;i++){
@@ -53,11 +54,19 @@ function buttons(){
 	// add two fresh nodes and populate them
 	header.appendChild(newNode);
 	header.appendChild(newNode2);
+	header.appendChild(newNode3);
 	
 	header.childNodes[0].appendChild(e);
 	header.childNodes[0].setAttribute('style','display: inline-block; cursor: pointer; background-color: #335633; padding: 4px 8px 4px 8px; color: #fff; margin: 0; margin-right: 20px;');
 	header.childNodes[1].appendChild(c);
 	header.childNodes[1].setAttribute('style','display: inline-block; cursor: pointer; background-color: #983a3a; padding: 4px 8px 4px 8px; margin: 0; color: #fff;');
+
+	var t = document.createElement('div');
+	var tText = document.createTextNode('Plex Media Server XML Browser');
+	t.appendChild(tText);
+	header.childNodes[2].appendChild(t);
+	header.childNodes[2].setAttribute('style','display: block; float: right; margin-right: 70px; font-size: 1.3em; font-weight: bold; color: #aaa; font-family: Tahoma, Geneva, sans-serif;');
+
 }
 
 
