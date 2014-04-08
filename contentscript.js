@@ -1,7 +1,6 @@
 var attributes = document.getElementsByClassName('webkit-html-attribute-name');
 var wanted = ['key','art','thumb','sourceIcon'];
 var dontFollow = ['transcode','search','butler','playQueues','help','playlists','player'];
-var dontUpdate = ['.mp4','.mov','.flv','.avi']
 
 for (var i=0; i<attributes.length; i++)
 {
