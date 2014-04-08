@@ -55,7 +55,7 @@ function buttons(){
  	var eText = document.createTextNode("Expand");
  	e.appendChild(eText);
 	header.childNodes[0].appendChild(e);
-	header.childNodes[0].setAttribute('style','display: inline-block; cursor: pointer; background-color: #335633; padding: 4px 8px 4px 8px; color: #fff; margin: 0; margin-right: 20px; border: 1px solid #ccc;');
+	header.childNodes[0].setAttribute('style','display: inline-block; cursor: pointer; background-color: #335633; padding: 4px 8px 4px 8px; color: #fff; margin: 0; margin-right: 15px; border: 1px solid #ccc;');
 	header.childNodes[0].addEventListener('click', function() { expand(); }, false);
 	
  	var c = document.createElement('span');
@@ -66,7 +66,7 @@ function buttons(){
 	header.childNodes[1].addEventListener('click', function() { contract(); }, false);
 	
 	var t = document.createElement('div');
-	var tText = document.createTextNode('Plex Media Server XML Browser');
+	var tText = document.createTextNode('Plex Media Server XML Helper');
 	t.appendChild(tText);
 	header.childNodes[2].appendChild(t);
 	header.childNodes[2].setAttribute('style','display: block; float: right; margin-right: 70px; font-size: 1.3em; font-weight: bold; color: #aaa; font-family: Tahoma, Geneva, sans-serif;');
