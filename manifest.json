@@ -1,5 +1,5 @@
 {
-	"name": "Clickable links for Plex Media Server XML",
+	"name": "Plex Media Server XML Helper",
 	"version": "0.2",
 	"manifest_version": 2,
 	"content_scripts":
