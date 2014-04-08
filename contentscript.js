@@ -9,6 +9,7 @@ var dontFollow = ['transcode','search','butler','playQueues','help','playlists',
 
 linkup()
 buttons()
+expand()
 
 function expand(){
 	for (var i=0; i<attributes.length; i++){
