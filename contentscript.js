@@ -1,6 +1,7 @@
 var attributes = document.getElementsByClassName('webkit-html-attribute-name');
 var wanted = ['key','art','thumb','sourceIcon'];
 var dontFollow = ['transcode','search','butler','playQueues','help','playlists','player'];
+var dontUpdate = ['.mp4','.mov','.flv','.avi']
 
 for (var i=0; i<attributes.length; i++)
 {
@@ -26,14 +27,16 @@ for (var i=0; i<attributes.length; i++)
 
 	var textNode = document.createTextNode(url);
  	
- 	// if this is a 'key' and it doesn't end with a / then we should enforce this
- 	// because if the next key is relative it needs this to function
+ 	// if this is a 'key', a local link, and it doesn't end with a / 
+ 	// then we enforce the addition of a / because if the next key is 
+ 	// also relative it needs this to function properly.
  	// NB: we do this after we create the url text as we only want to adjust
  	// the actual href and not the displayed text
- 	if (thisType=='key' && thisType.slice(-1) != '/'){
+ 	if (thisType=='key' && url.substr(0,7) != "http://" && url.substr(-1) != '/'){
 		url = url+"/";
  	}
-
+	console.log(url);
+	
 	var a = document.createElement('a');
 	a.setAttribute('href', url);
 	a.addEventListener('click', function() { window.location = this.getAttribute('href'); }, false);
