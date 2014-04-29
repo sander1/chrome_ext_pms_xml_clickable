@@ -2,10 +2,16 @@
 var attributes = document.getElementsByClassName('webkit-html-attribute-name');
 
 // nodes types we want to linkup()
-var wanted = ['key','art','thumb','sourceIcon','url','postURL','composite'];
+var wanted = ['key','art','thumb','sourceIcon','url','postURL','composite','parentKey','grandparentKey'];
 
 // key nodes that we don't want to linkup
 var dontFollow = ['transcode','search','butler','playQueues','help','playlists','player'];
+
+// check to make sure that we end in a trailing slash if we are past the root,
+// if we don't append one
+if(window.location.href.substr(-1,1) != "/" && window.location.href != window.location.origin){
+	window.location.href=window.location.href+"/";
+}
 
 linkup();
 buttons();
