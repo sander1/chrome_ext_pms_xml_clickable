@@ -1,0 +1,21 @@
+{
+	"name": "Plex Media Server XML Helper",
+	"version": "0.2",
+	"manifest_version": 2,
+	"permissions": [
+		"storage"
+	],
+	"icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
+	"content_scripts":
+	[
+		{
+			"matches": ["<all_urls>"],
+			"include_globs": ["*://*:32400/*"],
+			"js" : ["contentscript.js"]
+		}
+	]
+}
