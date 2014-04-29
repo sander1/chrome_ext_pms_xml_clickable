@@ -7,20 +7,27 @@ var wanted = ['key','art','thumb','sourceIcon','url','postURL','composite'];
 // key nodes that we don't want to linkup
 var dontFollow = ['transcode','search','butler','playQueues','help','playlists','player'];
 
-linkup()
-buttons()
-expand()
+linkup();
+buttons();
+chrome.storage.sync.get('expand', function(result){
+	if (result["expand"]){
+		expand();
+	}
+});
+
 
 function expand(){
 	for (var i=0; i<attributes.length; i++){
 		attributes[i].parentNode.setAttribute('style','display: block; margin-left: 15px;');
 	}
+	chrome.storage.sync.set({'expand': true});
 }
 
 function contract(){
 	for (var i=0; i<attributes.length; i++){
 		attributes[i].parentNode.setAttribute('style','');
 	}
+	chrome.storage.sync.set({'expand': false});
 }
 
 
