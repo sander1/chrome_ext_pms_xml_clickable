@@ -2,7 +2,7 @@
 var attributes = document.getElementsByClassName('webkit-html-attribute-name');
 
 // nodes types we want to linkup()
-var wanted = ['key','art','thumb','sourceIcon','url','postURL'];
+var wanted = ['key','art','thumb','sourceIcon','url','postURL','composite'];
 
 // key nodes that we don't want to linkup
 var dontFollow = ['transcode','search','butler','playQueues','help','playlists','player'];
