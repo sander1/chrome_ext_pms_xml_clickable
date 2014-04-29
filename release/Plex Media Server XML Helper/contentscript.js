@@ -9,7 +9,7 @@ var dontFollow = ['transcode','search','butler','playQueues','help','playlists',
 
 // check to make sure that we end in a trailing slash if we are past the root,
 // if we don't append one
-if(window.location.href.substr(-1,1) != "/" && window.location.href != window.location.origin){
+if(window.location.href.substr(-1,1) != "/" && window.location.href != window.location.origin && window.location.href.search('\\?') == -1){
 	window.location.href=window.location.href+"/";
 }
 
