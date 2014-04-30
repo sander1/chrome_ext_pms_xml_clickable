@@ -1,3 +1,8 @@
+// are we in Plex/Web?  If so don't do anything!
+if (window.location.href.search("32400\/web") != -1){
+	exit;
+}
+
 // nodes to process
 var attributes = document.getElementsByClassName('webkit-html-attribute-name');
 
