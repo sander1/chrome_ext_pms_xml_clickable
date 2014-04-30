@@ -9,7 +9,7 @@ var dontFollow = ['transcode','search','butler','playQueues','help','playlists',
 
 // check to make sure that we end in a trailing slash if we are past the root,
 // if we don't append one
-if(window.location.href.substr(-1,1) != "/" && window.location.href != window.location.origin && window.location.href.search('\\?') == -1){
+if(needsSlash(window.location.href)){
 	window.location.href=window.location.href+"/";
 }
 
@@ -21,6 +21,36 @@ chrome.storage.sync.get('expand', function(result){
 	}
 });
 
+function needsSlash(tString){
+	// test to see if a given URL needs a slash added
+	// first test known extensions for images:
+	if (tString.substr(-4,4) ==".png" || tString.substr(-4,4) == ".jpg"){
+		return false;
+	}
+	
+	// does this have a query within it?
+	if (tString.search('\\?') != -1){
+		return false;
+	}
+	
+	// and make sure to test against window.location.origin (when chrome displays main URL
+	// it always drops the last slash for some reason)
+	if (tString == window.location.origin){
+		return false;
+	}
+	
+	// corner case, PMS displays images under /composite/ that should not have a / added
+	if (tString.search("\/composite\/") != -1){
+		return false;
+	}
+
+	// finally if we got here and we don't end with a slash we need one
+	if (tString.substr(-1,1) != "/"){
+		return true;
+	}
+	
+	return false;
+}
 
 function expand(){
 	for (var i=0; i<attributes.length; i++){
