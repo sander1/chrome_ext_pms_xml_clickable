@@ -1,6 +1,7 @@
 {
 	"name": "Plex Media Server XML Helper",
 	"version": "0.2.2",
+	"description": "A Tool to help devs working with PMS raw XML",
 	"manifest_version": 2,
 	"permissions": [
 		"storage"
