@@ -9,11 +9,6 @@ if (window.location.href.search("32400\/web") == -1){
 	// key nodes that we don't want to linkup
 	var dontFollow = ['transcode','search','butler','playQueues','help','playlists','player'];
 
-	// check to make sure that we end in a trailing slash if we are past the root,
-	// if we don't append one
-	if(needsSlash(window.location.href)){
-		window.location.href=window.location.href+"/";
-	}
 
 	linkup();
 	buttons();
@@ -23,41 +18,6 @@ if (window.location.href.search("32400\/web") == -1){
 		}
 	});
 
-	function needsSlash(tString){
-		// test to see if a given URL needs a slash added
-		// first test known extensions for images:
-		if (tString.substr(-4,4) ==".png" || tString.substr(-4,4) == ".jpg"){
-			return false;
-		}
-		
-		// is this a media file?
-		if(tString.search('\/library\/parts\/') != -1){
-			return false;
-		}
-	
-		// does this have a query within it?
-		if (tString.search('\\?') != -1){
-			return false;
-		}
-	
-		// and make sure to test against window.location.origin (when chrome displays main URL
-		// it always drops the last slash for some reason)
-		if (tString == window.location.origin){
-			return false;
-		}
-	
-		// corner case, PMS displays images under /composite/ that should not have a / added
-		if (tString.search("\/composite\/") != -1 || tString.search("\/thumb\/") != -1 || tString.search("\/art\/") != -1){
-			return false;
-		}
-
-		// finally if we got here and we don't end with a slash we need one
-		if (tString.substr(-1,1) != "/"){
-			return true;
-		}
-	
-		return false;
-	}
 
 	function expand(){
 		for (var i=0; i<attributes.length; i++){
@@ -148,15 +108,18 @@ if (window.location.href.search("32400\/web") == -1){
 
 			var textNode = document.createTextNode(url);
 	
-			// if this is a 'key', a local link, does not have a ? (meaning it passes an argument) 
-			// and it doesn't end with a / then we enforce the addition of one -- if the next 
-			// key also relative it needs this to function properly.
+			// is this key a relative key?  if so, make it absolute
 			// NB: we do this after we create the url text as we only want to adjust
 			// the actual href and not the displayed text
-			if (thisType=='key' && url.substr(0,7) != "http://" && url.substr(-1) != '/' && url.search('\\?') == -1){
-				url += "/";
+			if (thisType=="key" && url.substr(0,7) != "http://" && url.substr(0,1) != '/'){
+				var newUrl = window.location.pathname;
+				if (newUrl.substr(-1,1) != "/"){
+					newUrl+="/";
+				}
+				newUrl+=url;
+				url=newUrl;
 			}
-		
+
 			var a = document.createElement('a');
 			a.setAttribute('href', url);
 			a.addEventListener('click', function() { window.location = this.getAttribute('href'); }, false);
