@@ -1,5 +1,5 @@
 // only process if we are not in Plex/Web!
-if (window.location.href.search("32400\/web") == -1){
+if (window.location.pathname.substr(0,4) != "/web"){
 	// nodes to process
 	var attributes = document.getElementsByClassName('webkit-html-attribute-name');
 
