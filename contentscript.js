@@ -4,7 +4,7 @@ if (window.location.pathname.substr(0,4) != "/web"){
 	var attributes = document.getElementsByClassName('webkit-html-attribute-name');
 
 	// nodes types we want to linkup()
-	var wanted = ['key','art','thumb','sourceIcon','url','postURL','composite','parentKey','grandparentKey'];
+	var wanted = ['key','art','thumb','sourceIcon','url','postURL','composite','parentKey','grandparentKey','theme','grandparentTheme','banner'];
 
 	// key nodes that we don't want to linkup
 	var dontFollow = ['transcode','search','butler','playQueues','help','playlists','player'];
@@ -80,7 +80,8 @@ if (window.location.pathname.substr(0,4) != "/web"){
 		header.lastChild.addEventListener('click', function() { contract(); }, false);
 
 		// Breadcrumbs
-
+		var tPath = window.location.pathname.split('/').slice();
+		
 		var textNode = document.createTextNode("/");
 		var s = document.createElement('span');
 		s.appendChild(textNode);
@@ -89,17 +90,27 @@ if (window.location.pathname.substr(0,4) != "/web"){
 		header.lastChild.setAttribute('style','font-weight: normal; font-size: 1.1em; color: #888;  margin-left: 30px;');
 
 		bcStyle = 'cursor: pointer; text-decoration: none; color: #1a1aa6; font-weight: bold; font-size: 1.1em; margin-left: 3px; margin-right: 3px;';
+		gStyle = 'color:#aaa; cursor: text;';
+
 		var textNode = document.createTextNode("root");
 		var a = document.createElement('a');
 		a.setAttribute('href', "/");
-		a.addEventListener('click', function() { window.location = this.getAttribute('href'); }, false);
-		a.appendChild(textNode);
-		header.appendChild(donorNode.cloneNode(true));
-		header.lastChild.appendChild(a);
-		header.lastChild.setAttribute('style',bcStyle);
+		if(tPath[1] != ""){
+			// we have a proper breadcrumb, make root a link
+			a.addEventListener('click', function() { window.location = this.getAttribute('href'); }, false);
+			a.appendChild(textNode);
+			header.appendChild(donorNode.cloneNode(true));
+			header.lastChild.appendChild(a);
+			header.lastChild.setAttribute('style',bcStyle);
+		} else {
+			// just root here, don't link this up
+			a.appendChild(textNode);
+			header.appendChild(donorNode.cloneNode(true));
+			header.lastChild.appendChild(a);
+			header.lastChild.setAttribute('style',bcStyle+gStyle);		
+		}
 
-
-		var tPath = window.location.pathname.split('/').slice();
+		
 		for( var i = 1; i < tPath.length; i++ )
 		{
 			// don't render blank nodes in here
@@ -134,7 +145,7 @@ if (window.location.pathname.substr(0,4) != "/web"){
 				s.appendChild(textNode);
 				header.appendChild(donorNode.cloneNode(true));
 				header.lastChild.appendChild(s);
-				header.lastChild.setAttribute('style',bcStyle+'color: #aaa; cursor: text;');
+				header.lastChild.setAttribute('style',bcStyle+gStyle);
 			
 			}
 
