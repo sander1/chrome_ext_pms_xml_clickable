@@ -47,40 +47,99 @@ if (window.location.pathname.substr(0,4) != "/web"){
 		header.childNodes[0].textContent="";
 
 		// clone this donor node (we must use nodes that already existed in order to style them,
-		// newly created nodes do not work but cloning existing ones do!)
-		var newNode = header.childNodes[0].cloneNode(true);
-		var newNode2 = header.childNodes[0].cloneNode(true);
-		var newNode3 = header.childNodes[0].cloneNode(true);
-
+		// with newly created nodes style does not work but styling cloned existing ones does!)
+		var donorNode = header.childNodes[0].cloneNode(true);
+		
 		// remove all existing nodes from header
 		for(i=0;i<=header.childElementCount;i++){
 			header.removeChild(header.childNodes[0]);
 		}	
 
-		// add three fresh nodes and populate them
-		header.appendChild(newNode);
-		header.appendChild(newNode2);
-		header.appendChild(newNode3);
+		var t = document.createElement('div');
+		var tText = document.createTextNode('Plex Media Server XML Helper');
+		t.appendChild(tText);
+		header.appendChild(donorNode.cloneNode(true));
+		header.lastChild.appendChild(t);
+		header.lastChild.setAttribute('style','display: block; float: right; margin-right: 70px; font-size: 1.3em; font-weight: bold; color: #aaa; font-family: Tahoma, Geneva, sans-serif;');
 
 		var e = document.createElement('span');
 		var eText = document.createTextNode("Expand");
 		e.appendChild(eText);
-		header.childNodes[0].appendChild(e);
-		header.childNodes[0].setAttribute('style','display: inline-block; cursor: pointer; background-color: #335633; padding: 4px 8px 4px 8px; color: #fff; margin: 0; margin-right: 15px; border: 1px solid #ccc;');
-		header.childNodes[0].addEventListener('click', function() { expand(); }, false);
+		header.appendChild(donorNode.cloneNode(true));
+		header.lastChild.appendChild(e);
+		header.lastChild.setAttribute('style','display: inline-block; cursor: pointer; background-color: #335633; padding: 4px 8px 4px 8px; color: #fff; margin: 0; margin-right: 15px; border: 1px solid #ccc;');
+		header.lastChild.addEventListener('click', function() { expand(); }, false);
 	
+
 		var c = document.createElement('span');
 		var linkText = document.createTextNode("Contract");
 		c.appendChild(linkText);
-		header.childNodes[1].appendChild(c);
-		header.childNodes[1].setAttribute('style','display: inline-block; cursor: pointer; background-color: #983a3a; padding: 4px 8px 4px 8px; margin: 0; color: #fff;  border: 1px solid #ccc;');
-		header.childNodes[1].addEventListener('click', function() { contract(); }, false);
-	
-		var t = document.createElement('div');
-		var tText = document.createTextNode('Plex Media Server XML Helper');
-		t.appendChild(tText);
-		header.childNodes[2].appendChild(t);
-		header.childNodes[2].setAttribute('style','display: block; float: right; margin-right: 70px; font-size: 1.3em; font-weight: bold; color: #aaa; font-family: Tahoma, Geneva, sans-serif;');
+		header.appendChild(donorNode.cloneNode(true));
+		header.lastChild.appendChild(c);
+		header.lastChild.setAttribute('style','display: inline-block; cursor: pointer; background-color: #983a3a; padding: 4px 8px 4px 8px; margin: 0; color: #fff;  border: 1px solid #ccc;');
+		header.lastChild.addEventListener('click', function() { contract(); }, false);
+
+		// Breadcrumbs
+
+		var textNode = document.createTextNode("/");
+		var s = document.createElement('span');
+		s.appendChild(textNode);
+		header.appendChild(donorNode.cloneNode(true));
+		header.lastChild.appendChild(s);
+		header.lastChild.setAttribute('style','font-weight: normal; font-size: 1.1em; color: #888;  margin-left: 30px;');
+
+		bcStyle = 'cursor: pointer; text-decoration: none; color: #1a1aa6; font-weight: bold; font-size: 1.1em; margin-left: 3px; margin-right: 3px;';
+		var textNode = document.createTextNode("root");
+		var a = document.createElement('a');
+		a.setAttribute('href', "/");
+		a.addEventListener('click', function() { window.location = this.getAttribute('href'); }, false);
+		a.appendChild(textNode);
+		header.appendChild(donorNode.cloneNode(true));
+		header.lastChild.appendChild(a);
+		header.lastChild.setAttribute('style',bcStyle);
+
+
+		var tPath = window.location.pathname.split('/').slice();
+		for( var i = 1; i < tPath.length; i++ )
+		{
+			// don't render blank nodes in here
+			if (tPath[i] == ""){
+				continue;
+			}
+			var textNode = document.createTextNode("/");
+			var s = document.createElement('span');
+			s.appendChild(textNode);
+			header.appendChild(donorNode.cloneNode(true));
+			header.lastChild.appendChild(s);
+			header.lastChild.setAttribute('style','font-weight: normal; font-size: 1.1em; color: #888;');
+			
+
+			var crumb = tPath[i];
+			var url = "/"+tPath.slice( 1, i + 1 ).join('/');
+			console.log(crumb+": "+url);
+
+			if (i != tPath.length-1){
+				var textNode = document.createTextNode(""+crumb+"");
+				var a = document.createElement('a');
+				a.setAttribute('href', url);
+				a.addEventListener('click', function() { window.location = this.getAttribute('href'); }, false);
+				a.appendChild(textNode);
+				header.appendChild(donorNode.cloneNode(true));
+				header.lastChild.appendChild(a);
+				header.lastChild.setAttribute('style',bcStyle);
+			} else {
+				// current node (no link)		
+				var textNode = document.createTextNode(tPath[tPath.length-1]);
+				var s = document.createElement('span');
+				s.appendChild(textNode);
+				header.appendChild(donorNode.cloneNode(true));
+				header.lastChild.appendChild(s);
+				header.lastChild.setAttribute('style',bcStyle+'color: #aaa; cursor: text;');
+			
+			}
+
+		}
+
 
 	}
 
