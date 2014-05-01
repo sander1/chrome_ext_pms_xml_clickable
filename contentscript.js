@@ -81,16 +81,19 @@ if (window.location.pathname.substr(0,4) != "/web"){
 
 		// Breadcrumbs
 		var tPath = window.location.pathname.split('/').slice();
+
+		bcStyle = 'cursor: pointer; text-decoration: none; color: #1a1aa6; font-weight: bold; font-size: 1.1em; margin-left: 3px; margin-right: 3px;';
+		gStyle = 'color:#aaa; cursor: text;';
+		dStyle = 'font-weight: normal; font-size: 1.1em; color: #888;';
+
 		
 		var textNode = document.createTextNode("/");
 		var s = document.createElement('span');
 		s.appendChild(textNode);
 		header.appendChild(donorNode.cloneNode(true));
 		header.lastChild.appendChild(s);
-		header.lastChild.setAttribute('style','font-weight: normal; font-size: 1.1em; color: #888;  margin-left: 30px;');
+		header.lastChild.setAttribute('style',dStyle+'margin-left: 30px;');
 
-		bcStyle = 'cursor: pointer; text-decoration: none; color: #1a1aa6; font-weight: bold; font-size: 1.1em; margin-left: 3px; margin-right: 3px;';
-		gStyle = 'color:#aaa; cursor: text;';
 
 		var textNode = document.createTextNode("root");
 		var a = document.createElement('a');
@@ -122,7 +125,7 @@ if (window.location.pathname.substr(0,4) != "/web"){
 			s.appendChild(textNode);
 			header.appendChild(donorNode.cloneNode(true));
 			header.lastChild.appendChild(s);
-			header.lastChild.setAttribute('style','font-weight: normal; font-size: 1.1em; color: #888;');
+			header.lastChild.setAttribute('style',dStyle);
 			
 			var crumb = tPath[i];
 			var url = "/"+tPath.slice( 1, i + 1 ).join('/');
