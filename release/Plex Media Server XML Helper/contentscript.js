@@ -124,10 +124,8 @@ if (window.location.pathname.substr(0,4) != "/web"){
 			header.lastChild.appendChild(s);
 			header.lastChild.setAttribute('style','font-weight: normal; font-size: 1.1em; color: #888;');
 			
-
 			var crumb = tPath[i];
 			var url = "/"+tPath.slice( 1, i + 1 ).join('/');
-			console.log(crumb+": "+url);
 
 			if (i != tPath.length-1){
 				var textNode = document.createTextNode(""+crumb+"");
