@@ -182,7 +182,7 @@ if (window.location.pathname.substr(0,4) != "/web"){
 			// is this key a relative key?  if so, make it absolute
 			// NB: we do this after we create the url text as we only want to adjust
 			// the actual href and not the displayed text
-			if (thisType=="key" && url.substr(0,7) != "http://" && url.substr(0,1) != '/'){
+			if (thisType=="key" && url.substr(0,7) != "http://" && url.substr(0,8) != "https://" && url.substr(0,1) != '/'){
 				var newUrl = window.location.pathname;
 				if (newUrl.substr(-1,1) != "/"){
 					newUrl+="/";
